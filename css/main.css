@@ -1,41 +1,26 @@
+
 .head{
-  background: black;
+  background: #A656C8;
   color: white;
   padding: 2px;
   text-align: center;
 }
 .footer{
-  background: black;
-  position: absolute;
+  background: #A656C8;
+  position:  fixed;
   bottom: 0;
   width: 100%;
   height: 70px;
-}
-#main{
-  margin-top: 10vh;
-}
-#eblem{
-  height: 300px;
-  width: 300px;
-  border: 8px double black;
-  margin: 0 auto;
-  border-radius: 20px 100px 20px;;
-}
-#links{
-  margin-top: 50px;
-  text-align: center;
+
 }
 .sign{
   font-size: 20px;
   margin: 50px;
-  background-color: black;
+  background-color: #A656C8;
   color: white;
   padding: 10px;
   border-radius: 20px;
   text-decoration: none;
-}
-#signIn{
-  padding: 10px 35px 10px 35px;
 }
 #mainSign{
   margin-top: 15vh;
@@ -64,7 +49,7 @@
   width: 270px;
   height: 40px;
   color: white;
-  background-color: black;
+  background-color: #A656C8;
   border-radius: 60px;
   outline: none;
 }
