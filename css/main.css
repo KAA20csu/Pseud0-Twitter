@@ -1,4 +1,7 @@
 
+body{
+  background-color: #FAF5F5;
+}
 .head{
   background: #A656C8;
   color: white;
@@ -11,7 +14,10 @@
   bottom: 0;
   width: 100%;
   height: 70px;
-
+  float: left;
+}
+.salutation{
+    font-family: monospace;
 }
 .sign{
   font-size: 20px;
@@ -21,23 +27,7 @@
   padding: 10px;
   border-radius: 20px;
   text-decoration: none;
-}
-#mainSign{
-  margin-top: 15vh;
-}
-#mainSignIn{
-  background-color: black;
-  height: 250px;
-  width: 300px;
-  border-radius: 50px;
-  margin: 0 auto;
-  text-align: center;
-}
-#formSignIn{
-  text-align: center;
-}
-#nameIn{
-  margin-top: 80px;
+  font-family: monospace;
 }
 .inputInfo{
   border-radius: 20px;

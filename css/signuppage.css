@@ -1,0 +1,14 @@
+#formSignIn{
+  text-align: center;
+  margin: 0 auto;
+}
+#main{
+  text-align: center;
+}
+#eblem{
+  background-image: url('D:/lab/Pseud0-Twitter/img/new.png');
+  background-size: 100px;
+  background-repeat: no-repeat;
+  height: 50px;
+  text-align: center;
+}
