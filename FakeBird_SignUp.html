@@ -3,15 +3,22 @@
   <head>
     <meta charset="utf-8">
     <title>Авторизация | FakeBird</title>
+    <link rel="stylesheet" href="css/main.css">
   </head>
   <body>
-    <div>
-      <form method="post">
-        <input type="text" name="user_Name" placeholder="Введите логин">
-        <input type="password" name="user_Pass" placeholder="Введите пароль"><br><br>
-        <input type="submit" value="Авторизация">
+    <div class="head">
+      <h1>FakeBird</h1>
+    </div>
+    <div id="mainSign">
+      <form method="post" id="formSignIn">
+        <div id="mainSignIn">
+          <input class="inputInfo" id="nameIn" type="text" name="user_Name" placeholder="Введите логин"><br><br>
+          <input class="inputInfo" type="password" name="user_Pass" placeholder="Введите пароль"><br><br>
+        </div><br>
+        <input class="bottomClick" type="submit" value="Авторизация">
       </form>
-
+    </div>
+    <div class="footer">
     </div>
   </body>
 </html>
