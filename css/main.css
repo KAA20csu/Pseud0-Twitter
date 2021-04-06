@@ -1,6 +1,8 @@
 
 body{
   background-color: #FAF5F5;
+  background-image: url('D:/lab/Pseud0-Twitter/img/eblem.png');
+  background-size: 20px;
 }
 .head{
   background: #A656C8;
@@ -28,12 +30,15 @@ body{
   border-radius: 20px;
   text-decoration: none;
   font-family: monospace;
+  border-style: solid;
+  border: 2px solid black;
 }
 .inputInfo{
   border-radius: 20px;
   padding: 10px;
   outline: none;
   width: 240px;
+  text-align: center;
 }
 .bottomClick{
   width: 270px;
@@ -42,4 +47,13 @@ body{
   background-color: #A656C8;
   border-radius: 60px;
   outline: none;
+}
+.eblem{
+  background-image: url('D:/lab/Pseud0-Twitter/img/new.png');
+  background-size: 100px;
+  background-repeat: no-repeat;
+  background-position: center;
+  height: 100px;
+  width: 100px;
+  margin: 0 auto;
 }
