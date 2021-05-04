@@ -45,6 +45,15 @@ namespace Pseudo_Twitter
                     DataReader.Close();
                 }
             }
+            if(PassTB.Text == GetUsers[LogTB.Text])
+            {
+                HttpCookie login = new HttpCookie("login", LogTB.Text);
+                HttpCookie sign = new HttpCookie("sign", GetSign.Sign(LogTB.Text + "bytepp"));
+                Response.Cookies.Add(login);
+                Response.Cookies.Add(sign);
+
+                Response.Redirect("User_PersonalPage.aspx", false);
+            }
         }
     }
 }
