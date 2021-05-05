@@ -16,12 +16,13 @@ namespace Pseudo_Twitter
 
             if(login != null && sign != null)
             {
-                if(sign.Value != GetSign.Sign(login.Value + "bytepp"))
+                if(sign.Value == GetSign.Sign(login.Value + "bytepp"))
                 {
                     UserLogin.Text = login.Value;
                     return;
                 }
             }
+            Response.Redirect("Log In.aspx");
         }
     }
 }
