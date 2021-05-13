@@ -12,7 +12,9 @@
         <div>
             <asp:Table runat="server">
                 <asp:TableRow>
-                    <asp:TableCell></asp:TableCell>
+                    <asp:TableCell>
+                        <asp:Label runat="server" Text="Your Login" ID="AuthorizedLogName"></asp:Label>
+                    </asp:TableCell>
                 </asp:TableRow>
             </asp:Table>
         </div>

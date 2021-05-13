@@ -11,7 +11,11 @@ namespace Twi
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            HttpCookie login = Request.Cookies["login"];
+            if (login != null)
+            {
+                AuthorizedLogName.Text = login.Value;
+            }
         }
     }
 }

@@ -42,7 +42,9 @@ namespace Twi
             }
             if(PasswordBox.Text == person.Password)
             {
-                Response.Redirect("UserPage.aspx");
+                HttpCookie logCookie = new HttpCookie("login", LoginBox.Text);
+                Response.Cookies.Add(logCookie);
+                Response.Redirect("UserPage.aspx", false);
             }
         }
     }
