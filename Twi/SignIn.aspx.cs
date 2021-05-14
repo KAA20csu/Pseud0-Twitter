@@ -7,6 +7,7 @@ using System.Web.UI.WebControls;
 using System.Data;
 using System.Data.SqlClient;
 using System.Configuration;
+using System.Drawing;
 
 namespace Twi
 {
@@ -15,6 +16,9 @@ namespace Twi
         private SqlConnection Connection = null;
         protected async void Page_Load(object sender, EventArgs e)
         {
+            
+            LoginBox.Text = "Введите логин";
+            LoginBox.ForeColor = Color.Gray;
             string ConnectionString = ConfigurationManager.ConnectionStrings["DataBaseConnection"].ConnectionString;
             Connection = new SqlConnection(ConnectionString);
             await Connection.OpenAsync();
@@ -42,10 +46,13 @@ namespace Twi
             }
             if(PasswordBox.Text == person.Password)
             {
-                HttpCookie logCookie = new HttpCookie("login", LoginBox.Text);
-                Response.Cookies.Add(logCookie);
-                Response.Redirect("UserPage.aspx", false);
+                Response.Redirect("UserPage.aspx");
             }
+        }
+
+        protected void LoginBox_TextChanged(object sender, EventArgs e)
+        {
+            LoginBox.Text = "";
         }
     }
     class Person
