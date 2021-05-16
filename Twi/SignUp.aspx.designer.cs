@@ -33,6 +33,24 @@ namespace Twi
         protected global::System.Web.UI.WebControls.TextBox LoginBox;
 
         /// <summary>
+        /// Mail элемент управления.
+        /// </summary>
+        /// <remarks>
+        /// Автоматически создаваемое поле.
+        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox Mail;
+
+        /// <summary>
+        /// Sex элемент управления.
+        /// </summary>
+        /// <remarks>
+        /// Автоматически создаваемое поле.
+        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox Sex;
+
+        /// <summary>
         /// PasswordBox элемент управления.
         /// </summary>
         /// <remarks>

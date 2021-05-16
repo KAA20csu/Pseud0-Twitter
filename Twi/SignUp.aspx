@@ -23,6 +23,26 @@
                 </asp:TableRow>
                 <asp:TableRow>
                     <asp:TableCell>
+                        <asp:Label runat="server" Text="E-mail:"></asp:Label>
+                    </asp:TableCell>
+                </asp:TableRow>
+                <asp:TableRow>
+                    <asp:TableCell>
+                        <asp:TextBox runat="server" ID="Mail" TextMode="Email"></asp:TextBox>
+                    </asp:TableCell>
+                </asp:TableRow>
+                <asp:TableRow>
+                    <asp:TableCell>
+                        <asp:Label runat="server" Text="Пол:"></asp:Label>
+                    </asp:TableCell>
+                </asp:TableRow>
+                <asp:TableRow>
+                    <asp:TableCell>
+                        <asp:TextBox runat="server" ID="Sex"></asp:TextBox>
+                    </asp:TableCell>
+                </asp:TableRow>
+                <asp:TableRow>
+                    <asp:TableCell>
                         <asp:Label runat="server" Text="Пароль:"></asp:Label>
                     </asp:TableCell>
                 </asp:TableRow>
