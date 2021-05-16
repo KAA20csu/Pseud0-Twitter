@@ -15,6 +15,12 @@
                     <asp:TableCell>
                         <asp:Label runat="server" Text="Your Login" ID="AuthorizedLogName"></asp:Label>
                     </asp:TableCell>
+                    <asp:TableCell>
+                        <asp:Label runat="server" Text="Your Mail" ID="Mail"></asp:Label>
+                    </asp:TableCell>
+                    <asp:TableCell>
+                        <asp:Label runat="server" Text="Your Sex" ID="Sex"></asp:Label>
+                    </asp:TableCell>
                 </asp:TableRow>
             </asp:Table>
         </div>

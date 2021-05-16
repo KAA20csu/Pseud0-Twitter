@@ -21,7 +21,7 @@ namespace Twi
 
         protected async void Register_Click(object sender, EventArgs e)
         {
-            SqlCommand GetUsetInfo = new SqlCommand("SELECT [Login], [Password] FROM [Users]", Connection);
+            SqlCommand GetUsetInfo = new SqlCommand("SELECT [Login], [Password], [Mail], [Sex] FROM [Users]", Connection);
 
             SqlDataReader Reader = null;
             Person person = null;
@@ -30,7 +30,7 @@ namespace Twi
                 Reader = await GetUsetInfo.ExecuteReaderAsync();
                 while (await Reader.ReadAsync())
                 {
-                    person = new Person(Reader["Login"].ToString(), Reader["Password"].ToString());
+                    person = new Person(Reader["Login"].ToString(), Reader["Password"].ToString(), Reader["Mail"].ToString(), Reader["Sex"].ToString());
                 }
             }
             catch { }
