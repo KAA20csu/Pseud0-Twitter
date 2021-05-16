@@ -38,7 +38,14 @@
                 </asp:TableRow>
                 <asp:TableRow>
                     <asp:TableCell>
-                        <asp:TextBox runat="server" ID="Sex"></asp:TextBox>
+                        <asp:DropDownList runat="server" ID="Sex">
+                            <asp:ListItem>
+                                Male
+                            </asp:ListItem>
+                            <asp:ListItem>
+                                Female
+                            </asp:ListItem>
+                        </asp:DropDownList>
                     </asp:TableCell>
                 </asp:TableRow>
                 <asp:TableRow>

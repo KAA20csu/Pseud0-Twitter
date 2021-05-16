@@ -45,7 +45,7 @@ namespace Twi
                 RegistrateUser.Parameters.AddWithValue("Login", LoginBox.Text);
                 RegistrateUser.Parameters.AddWithValue("Password", PasswordBox.Text);
                 RegistrateUser.Parameters.AddWithValue("Mail", Mail.Text);
-                RegistrateUser.Parameters.AddWithValue("Sex", Sex.Text);
+                RegistrateUser.Parameters.AddWithValue("Sex", Sex.SelectedValue.ToString().Trim('\n', '\r',' '));
                 await RegistrateUser.ExecuteNonQueryAsync();
                 Response.Redirect("SignIn.aspx", false);
             }

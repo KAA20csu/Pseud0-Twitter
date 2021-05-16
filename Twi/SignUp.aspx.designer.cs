@@ -48,7 +48,7 @@ namespace Twi
         /// Автоматически создаваемое поле.
         /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox Sex;
+        protected global::System.Web.UI.WebControls.DropDownList Sex;
 
         /// <summary>
         /// PasswordBox элемент управления.
