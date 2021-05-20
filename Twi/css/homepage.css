@@ -1,0 +1,38 @@
+﻿#eblem {
+    width: 100%;
+    display: flex;
+    margin-left: auto;
+    margin-top: auto;
+    margin-right: auto;
+    margin-bottom: auto;
+}
+
+#linkwa {
+    margin-top: 450px;
+}
+#greeting {
+    float: right;
+    height: 100vh;
+    width: 55%;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    text-align: center;
+}
+#mediaPart {
+    background-image: url("/../img/backgroundImage.png");
+    width: 45%;
+    height: 100vh;
+    float: left;
+    background-position: center;
+    -webkit-box-shadow: -5px -5px 5px -5px rgba(34, 60, 80, 0.6) inset;
+    -moz-box-shadow: -5px -5px 5px -5px rgba(34, 60, 80, 0.6) inset;
+    box-shadow: -5px -5px 5px -5px rgba(34, 60, 80, 0.6) inset;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    display: flex;
+}
+#linkEnter{
+    padding:14px 35px 14px 35px;
+}

@@ -1,0 +1,21 @@
+﻿#inputWindow {
+    text-align: center;
+    border-radius: 50px;
+    position: absolute;
+    padding: 50px;
+    top: 23%;
+    left: 43%;
+    margin: -50px 0 0 -100px;
+    background-color: #F0DCF4;
+    -webkit-box-shadow: 0px 0px 18px 0px rgba(34, 60, 80, 0.2);
+    -moz-box-shadow: 0px 0px 18px 0px rgba(34, 60, 80, 0.2);
+    box-shadow: 0px 0px 18px 0px rgba(34, 60, 80, 0.2);
+}
+.gender {
+    border-radius: 50px;
+    border: 2px solid;
+    height: 39px;
+    width: 250px;
+    outline: none;
+    text-align: center;
+}

@@ -17,8 +17,8 @@ namespace Twi
             if (login != null)
             {
                 AuthorizedLogName.Text = login.Value;
-                Mail.Text = mail.Value;
-                Sex.Text = sex.Value;
+                //Mail.Text = mail.Value;
+                //Sex.Text = sex.Value;
             }
         }
     }

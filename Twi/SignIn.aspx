@@ -5,11 +5,15 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <title></title>
+    
+    <title> Войти | FakeBird </title>
+    <link href="css/main.css" rel="stylesheet" />
+    <link href="css/loginWindow.css" rel="stylesheet" />
 </head>
 <body>
     <form id="form1" runat="server">
-        <div>
+        <div id="inputWindow">
+            <img src="img/eblem.png" class="littlEbl" />
             <asp:Table runat="server">
                 <asp:TableRow>
                     <asp:TableCell>
@@ -18,7 +22,7 @@
                 </asp:TableRow>
                 <asp:TableRow>
                     <asp:TableCell>
-                        <asp:TextBox runat="server" ID="LoginBox"></asp:TextBox>
+                        <asp:TextBox runat="server" ID="LoginBox" CssClass="inputBox"></asp:TextBox>
                     </asp:TableCell>
                 </asp:TableRow>
                 <asp:TableRow>
@@ -28,12 +32,12 @@
                 </asp:TableRow>
                 <asp:TableRow>
                     <asp:TableCell>
-                        <asp:TextBox runat="server" ID="PasswordBox" TextMode="Password"></asp:TextBox>
+                        <asp:TextBox runat="server" ID="PasswordBox" TextMode="Password" CssClass="inputBox"></asp:TextBox>
                     </asp:TableCell>
                 </asp:TableRow>
                 <asp:TableRow>
                     <asp:TableCell>
-                        <asp:Button runat="server" OnClick="Login_Click"/>
+                        <asp:Button Text="Войти" runat="server" OnClick="Login_Click" CssClass="enterButton"/>
                     </asp:TableCell>
                 </asp:TableRow>
             </asp:Table>

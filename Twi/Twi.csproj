@@ -71,16 +71,19 @@
     <Content Include="App_Data\UserBase_log.ldf">
       <DependentUpon>UserBase.mdf</DependentUpon>
     </Content>
-    <Content Include="ChatPage.html" />
+    <Content Include="ava.jpg" />
+    <Content Include="css\homepage.css" />
+    <Content Include="css\loginWindow.css" />
+    <Content Include="css\main.css" />
+    <Content Include="css\registerWindow.css" />
+    <Content Include="css\userPage.css" />
+    <Content Include="HomePage.html" />
     <Content Include="SignIn.aspx" />
     <Content Include="SignUp.aspx" />
     <Content Include="UserPage.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Chatter.ashx.cs">
-      <DependentUpon>Chatter.ashx</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SignIn.aspx.cs">
       <DependentUpon>SignIn.aspx</DependentUpon>
@@ -105,7 +108,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Chatter.ashx" />
     <None Include="packages.config" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

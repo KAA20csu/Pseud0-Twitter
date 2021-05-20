@@ -23,7 +23,7 @@ namespace Twi
         protected async void Login_Click(object sender, EventArgs e)
         {
             SqlCommand GetUsetInfo = new SqlCommand("SELECT [Login], [Password], [Mail], [Sex] FROM [Users]", Connection);
-
+            List<Person> UsersList = new List<Person>();
             SqlDataReader Reader = null;
             Person person = null;
             try
@@ -32,6 +32,7 @@ namespace Twi
                 while(await Reader.ReadAsync())
                 {
                     person = new Person(Reader["Login"].ToString(), Reader["Password"].ToString(), Reader["Mail"].ToString(), Reader["Sex"].ToString());
+                    UsersList.Add(person);
                 }
             }
             catch { }
@@ -40,16 +41,23 @@ namespace Twi
                 if (Reader != null)
                     Reader.Close();
             }
-            if(PasswordBox.Text == person.Password)
+            foreach(var user in UsersList)
             {
-                HttpCookie logCookie = new HttpCookie("login", LoginBox.Text);
-                HttpCookie mailCookie = new HttpCookie("mail", person.Mail);
-                HttpCookie sexCookie = new HttpCookie("sex", person.Sex);
-                Response.Cookies.Add(logCookie);
-                Response.Cookies.Add(mailCookie);
-                Response.Cookies.Add(sexCookie);
-                Response.Redirect("UserPage.aspx", false);
+                if(user.Login == LoginBox.Text)
+                {
+                    if (PasswordBox.Text == user.Password)
+                    {
+                        HttpCookie logCookie = new HttpCookie("login", LoginBox.Text);
+                        HttpCookie mailCookie = new HttpCookie("mail", person.Mail);
+                        HttpCookie sexCookie = new HttpCookie("sex", person.Sex);
+                        Response.Cookies.Add(logCookie);
+                        Response.Cookies.Add(mailCookie);
+                        Response.Cookies.Add(sexCookie);
+                        Response.Redirect("UserPage.aspx", false);
+                    }
+                }
             }
+            
         }
     }
     class Person

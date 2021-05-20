@@ -6,6 +6,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Drawing;
 
 namespace Twi
 {
@@ -41,11 +42,16 @@ namespace Twi
             }
             if(person.Login != LoginBox.Text)
             {
-                SqlCommand RegistrateUser = new SqlCommand("INSERT INTO [Users] VALUES(@Login, @Password, @Mail, @Sex)", Connection);
+                System.Drawing.Image image = System.Drawing.Image.FromFile(@"C:\Users\aafil\Desktop\новые\Twi\bin\ava.jpg");
+                System.IO.MemoryStream memoryStream = new System.IO.MemoryStream();
+                image.Save(memoryStream, System.Drawing.Imaging.ImageFormat.Png);
+                byte[] b = memoryStream.ToArray();
+                SqlCommand RegistrateUser = new SqlCommand("INSERT INTO [Users] VALUES(@Login, @Password, @Mail, @Sex, @Avatar)", Connection);
                 RegistrateUser.Parameters.AddWithValue("Login", LoginBox.Text);
                 RegistrateUser.Parameters.AddWithValue("Password", PasswordBox.Text);
                 RegistrateUser.Parameters.AddWithValue("Mail", Mail.Text);
                 RegistrateUser.Parameters.AddWithValue("Sex", Sex.SelectedValue.ToString().Trim('\n', '\r',' '));
+                RegistrateUser.Parameters.AddWithValue("Avatar", b);
                 await RegistrateUser.ExecuteNonQueryAsync();
                 Response.Redirect("SignIn.aspx", false);
             }
