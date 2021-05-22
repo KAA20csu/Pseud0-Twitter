@@ -18,9 +18,15 @@
         </div> 
         <div id="backface">
             <div id="face"></div>
-            <asp:Label runat="server" Text="Your Login" ID="AuthorizedLogName" CssClass="nameUser"></asp:Label>            
+            <asp:Label runat="server" Text="Your Login" ID="AuthorizedLogName" CssClass="nameUser"></asp:Label>    
+            <form runat="server">
+                <asp:Button runat="server" Text="Write Post" OnClick="GoToChat" />
+            </form>
+            
         </div>
+        
     </div>
+    
     <input type="checkbox" id="nav-toggle" hidden="hidden"/>    
         <div class="nav">
             <label for="nav-toggle" class="nav-toggle"></label>

@@ -67,6 +67,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Data\PostMaker.mdf" />
+    <Content Include="App_Data\PostMaker_log.ldf">
+      <DependentUpon>PostMaker.mdf</DependentUpon>
+    </Content>
     <Content Include="App_Data\UserBase.mdf" />
     <Content Include="App_Data\UserBase_log.ldf">
       <DependentUpon>UserBase.mdf</DependentUpon>
@@ -78,12 +82,28 @@
     <Content Include="css\registerWindow.css" />
     <Content Include="css\userPage.css" />
     <Content Include="HomePage.html" />
+    <Content Include="PostFolder\NewsStream.aspx" />
+    <Content Include="PostFolder\PostForm.aspx" />
     <Content Include="SignIn.aspx" />
     <Content Include="SignUp.aspx" />
     <Content Include="UserPage.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="PostFolder\NewsStream.aspx.cs">
+      <DependentUpon>NewsStream.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PostFolder\NewsStream.aspx.designer.cs">
+      <DependentUpon>NewsStream.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="PostFolder\PostForm.aspx.cs">
+      <DependentUpon>PostForm.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PostFolder\PostForm.aspx.designer.cs">
+      <DependentUpon>PostForm.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SignIn.aspx.cs">
       <DependentUpon>SignIn.aspx</DependentUpon>
@@ -109,6 +129,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <Content Include="PostFolder\Web.config" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

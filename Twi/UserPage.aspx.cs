@@ -21,5 +21,10 @@ namespace Twi
                 //Sex.Text = sex.Value;
             }
         }
+
+        protected void GoToChat(object sender, EventArgs e)
+        {
+            Response.Redirect("PostFolder/PostForm.aspx");
+        }
     }
 }
