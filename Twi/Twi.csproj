@@ -82,6 +82,7 @@
     <Content Include="css\registerWindow.css" />
     <Content Include="css\userPage.css" />
     <Content Include="HomePage.html" />
+    <Content Include="PostFolder\News.aspx" />
     <Content Include="PostFolder\NewsStream.aspx" />
     <Content Include="PostFolder\PostForm.aspx" />
     <Content Include="SignIn.aspx" />
@@ -90,6 +91,13 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="PostFolder\News.aspx.cs">
+      <DependentUpon>News.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PostFolder\News.aspx.designer.cs">
+      <DependentUpon>News.aspx</DependentUpon>
+    </Compile>
     <Compile Include="PostFolder\NewsStream.aspx.cs">
       <DependentUpon>NewsStream.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
