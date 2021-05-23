@@ -41,27 +41,33 @@ namespace Twi
                 if (Reader != null)
                     Reader.Close();
             }
-            foreach(var newUser in RegPers)
+            if (!Check(RegPers))
             {
-                if (newUser.Login != LoginBox.Text)
+                SqlCommand RegistrateUser = new SqlCommand("INSERT INTO [Users] VALUES(@Login, @Password, @Mail, @Sex, @Avatar)", Connection);
+                RegistrateUser.Parameters.AddWithValue("Login", LoginBox.Text);
+                RegistrateUser.Parameters.AddWithValue("Password", PasswordBox.Text);
+                RegistrateUser.Parameters.AddWithValue("Mail", Mail.Text);
+                RegistrateUser.Parameters.AddWithValue("Sex", Sex.SelectedValue.ToString().Trim('\n', '\r', ' '));
+                RegistrateUser.Parameters.AddWithValue("Avatar", "ava.jpg");
+                await RegistrateUser.ExecuteNonQueryAsync();
+                Response.Redirect("SignIn.aspx", false);
+            }
+            else
+            {
+                string script = "alert('Такой логин уже существует!')";
+                ClientScript.RegisterClientScriptBlock(this.GetType(), "MessageBox", script, true);
+            }
+        }
+        private bool Check(List<Person> RegPers)
+        {
+            foreach(var user in RegPers)
+            {
+                if(user.Login == LoginBox.Text)
                 {
-                    SqlCommand RegistrateUser = new SqlCommand("INSERT INTO [Users] VALUES(@Login, @Password, @Mail, @Sex, @Avatar)", Connection);
-                    RegistrateUser.Parameters.AddWithValue("Login", LoginBox.Text);
-                    RegistrateUser.Parameters.AddWithValue("Password", PasswordBox.Text);
-                    RegistrateUser.Parameters.AddWithValue("Mail", Mail.Text);
-                    RegistrateUser.Parameters.AddWithValue("Sex", Sex.SelectedValue.ToString().Trim('\n', '\r', ' '));
-                    RegistrateUser.Parameters.AddWithValue("Avatar", "ava.jpg");
-                    await RegistrateUser.ExecuteNonQueryAsync();
-                    Response.Redirect("SignIn.aspx", false);
-                }
-                else
-                {
-                    string script = "alert('Такой логин уже существует!')";
-                    ClientScript.RegisterClientScriptBlock(this.GetType(), "MessageBox", script, true);
+                    return true;
                 }
             }
-            
-            
+            return false;
         }
     }
 }
