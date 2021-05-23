@@ -18,9 +18,11 @@
         </div> 
         <div id="backface">
             <div id="face"></div>
-            <asp:Label runat="server" Text="Your Login" ID="AuthorizedLogName" CssClass="nameUser"></asp:Label>    
+            <asp:Label runat="server" Text="Your Login" ID="AuthorizedLogName" CssClass="nameUser"></asp:Label>
+            <asp:Image runat="server" ImageUrl="~/ava.jpg" />
             <form runat="server">
-                <asp:Button runat="server" Text="Write Post" OnClick="GoToChat" />
+                <asp:Button runat="server" Text="Создать публикацию" OnClick="GoToChat" />
+                <asp:Button runat="server" Text="Выйти" OnClick="LogOut_Click" />
             </form>
             
         </div>

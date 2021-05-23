@@ -12,19 +12,26 @@ namespace Twi
         protected void Page_Load(object sender, EventArgs e)
         {
             HttpCookie login = Request.Cookies["login"];
-            HttpCookie mail = Request.Cookies["mail"];
-            HttpCookie sex = Request.Cookies["sex"];
             if (login != null)
             {
                 AuthorizedLogName.Text = login.Value;
-                //Mail.Text = mail.Value;
-                //Sex.Text = sex.Value;
+            }
+            else
+            {
+                Response.Redirect("SignIn.aspx");
             }
         }
 
         protected void GoToChat(object sender, EventArgs e)
         {
             Response.Redirect("PostFolder/PostForm.aspx");
+        }
+        protected void LogOut_Click(object sender, EventArgs e)
+        {
+            HttpCookie login = new HttpCookie("login", string.Empty);
+            login.Expires = DateTime.Now.AddDays(-1);
+            Response.Cookies.Add(login);
+            Response.Redirect("HomePage.html");
         }
     }
 }
