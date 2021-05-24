@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="UserPage.aspx.cs" Inherits="Twi.UserPage" %>
+﻿<%@ Page Language="C#" Async="true" AutoEventWireup="true" CodeBehind="UserPage.aspx.cs" Inherits="Twi.UserPage"  %>
 
 <!DOCTYPE html>
 
@@ -7,9 +7,11 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <link href="css/main.css" rel="stylesheet" />
     <link href="css/userPage.css" rel="stylesheet" />
+    <link href="css/head.css" rel="stylesheet" />
     <title></title>
 </head>
 <body>
+    <form runat="server" id="data">
     <div class="container">
         <div class="huder">
             <a href="#">
@@ -17,44 +19,25 @@
             </a>            
         </div> 
         <div id="backface">
-            <div id="face"></div>
-            <asp:Label runat="server" Text="Your Login" ID="AuthorizedLogName" CssClass="nameUser"></asp:Label>
-            <asp:Image runat="server" ImageUrl="~/ava.jpg" />
-            <form runat="server">
-                <asp:Button runat="server" Text="Создать публикацию" OnClick="GoToChat" />
-                <asp:Button runat="server" Text="Выйти" OnClick="LogOut_Click" />
-            </form>
-            
+            <asp:Image ID="face" runat="server"/><br/>
+            <asp:Label runat="server" Text="Your Login" ID="AuthorizedLogName" CssClass="nameUser"></asp:Label>  
+        </div>
+        <div id="content">
+            <asp:TextBox runat="server" ID="PostBox"></asp:TextBox>
+            <asp:Button runat="server" Text="Создать публикацию" OnClick="GoToChat" CssClass="enterButton"/>             
+            <asp:FileUpload runat="server" ID="newAva"/>
+            <asp:Button runat="server" Text="Загрузить фото" OnClick="Upload_Click"/>
+            <asp:Button runat="server" Text="Выйти" OnClick="Unnamed_Click" /> 
         </div>
         
-    </div>
-    
+    </div>    
     <input type="checkbox" id="nav-toggle" hidden="hidden"/>    
         <div class="nav">
             <label for="nav-toggle" class="nav-toggle"></label>
-            <ul>
-               <li><a href="#1" class="li">Один</a></li>
-               <li><a href="#2" class="li">Два</a></li>           
+            <ul>     
+                
             </ul>
-        </div>                
-        
-        <%--<form id="form1" runat="server">        
-            <div>
-                <asp:Table runat="server">
-                    <asp:TableRow>
-                        <asp:TableCell>
-                            <asp:Label runat="server" Text="Your Login" ID="AuthorizedLogName"></asp:Label>
-                        </asp:TableCell>
-                        <asp:TableCell>
-                            <asp:Label runat="server" Text="Your Mail" ID="Mail"></asp:Label>
-                        </asp:TableCell>
-                        <asp:TableCell>
-                            <asp:Label runat="server" Text="Your Sex" ID="Sex"></asp:Label>
-                        </asp:TableCell>
-                    </asp:TableRow>
-                </asp:Table>
-            </div>
-        </form>--%>
-    
+        </div>  
+    </form>
 </body>
 </html>

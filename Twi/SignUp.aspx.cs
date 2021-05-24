@@ -2,11 +2,6 @@
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
-using System.Drawing;
 
 namespace Twi
 {
@@ -48,7 +43,7 @@ namespace Twi
                 RegistrateUser.Parameters.AddWithValue("Password", PasswordBox.Text);
                 RegistrateUser.Parameters.AddWithValue("Mail", Mail.Text);
                 RegistrateUser.Parameters.AddWithValue("Sex", Sex.SelectedValue.ToString().Trim('\n', '\r', ' '));
-                RegistrateUser.Parameters.AddWithValue("Avatar", "ava.jpg");
+                RegistrateUser.Parameters.AddWithValue("Avatar", @"avatars/ava.jpg");
                 await RegistrateUser.ExecuteNonQueryAsync();
                 Response.Redirect("SignIn.aspx", false);
             }
