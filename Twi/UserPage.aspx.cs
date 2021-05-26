@@ -125,16 +125,16 @@ namespace Twi
             string ConnectionString = ConfigurationManager.ConnectionStrings["DataBaseConnection"].ConnectionString;
             Connection = new SqlConnection(ConnectionString);
             await Connection.OpenAsync();
-
-            SqlCommand GetText = new SqlCommand("SELECT [Text] FROM [UserPosts]", Connection);
+            HttpCookie login = Request.Cookies["login"];
+            SqlCommand GetText = new SqlCommand("SELECT [Name], [Text] FROM [UserPosts]", Connection);
             SqlDataReader Reader = null;
-            List<string> PostList = new List<string>();
+            Stack<IPerson> Users = new Stack<IPerson>();
             try
             {
                 Reader = await GetText.ExecuteReaderAsync();
                 while (await Reader.ReadAsync())
                 {
-                    PostList.Add(Reader["Text"].ToString());
+                    Users.Push(new IPerson(Reader["Name"].ToString(), Reader["Text"].ToString()));
                 }
             }
             catch
@@ -146,10 +146,14 @@ namespace Twi
                 if (Reader != null)
                     Reader.Close();
             }
-            foreach(string pst in PostList)
+            foreach(var c in Users)
             {
-                l.Text += pst;
+                if(c.Login == login.Value)
+                {
+                    l.Text += c.Text;
+                }
             }
+            
         }
     }
     public class IPerson
