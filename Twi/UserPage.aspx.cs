@@ -22,7 +22,7 @@ namespace Twi
             HttpCookie login = Request.Cookies["login"];
 
             string img = null;
-            List<string> Posts = new List<string>();
+            
             SqlCommand GetImage = new SqlCommand("SELECT [Login], [Avatar] FROM [Users]", Connection);
             SqlDataReader Reader = null;
             try
@@ -46,25 +46,22 @@ namespace Twi
             {
                 AuthorizedLogName.Text = login.Value;
                 face.ImageUrl = img;
+                GettPostts();
             }
             else
             {
                 Response.Redirect("SignIn.aspx");
             }
+            
         }
         protected async void GoToChat(object sender, EventArgs e)
         {
             HttpCookie login = Request.Cookies["login"];
-            if(PostBox.Text != null)
+            if (PostBox.Text != null)
             {
                 SqlCommand GetPost = new SqlCommand("INSERT INTO [UserPosts] (Name, Text)VALUES(@Name, @Text)", Connection);
                 GetPost.Parameters.AddWithValue("Name", login.Value);
                 GetPost.Parameters.AddWithValue("Text", PostBox.Text);
-                Label Post = new Label()
-                {
-                    Text = PostBox.Text
-                };
-                data.Controls.Add(Post);
                 await GetPost.ExecuteNonQueryAsync();
             }
         }
@@ -122,6 +119,37 @@ namespace Twi
 
             Response.Cookies.Add(login);
             Response.Redirect("SignIn.aspx");
+        }
+        private async void GettPostts()
+        {
+            string ConnectionString = ConfigurationManager.ConnectionStrings["DataBaseConnection"].ConnectionString;
+            Connection = new SqlConnection(ConnectionString);
+            await Connection.OpenAsync();
+
+            SqlCommand GetText = new SqlCommand("SELECT [Text] FROM [UserPosts]", Connection);
+            SqlDataReader Reader = null;
+            List<string> PostList = new List<string>();
+            try
+            {
+                Reader = await GetText.ExecuteReaderAsync();
+                while (await Reader.ReadAsync())
+                {
+                    PostList.Add(Reader["Text"].ToString());
+                }
+            }
+            catch
+            {
+
+            }
+            finally
+            {
+                if (Reader != null)
+                    Reader.Close();
+            }
+            foreach(string pst in PostList)
+            {
+                l.Text += pst;
+            }
         }
     }
     public class IPerson
