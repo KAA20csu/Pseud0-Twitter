@@ -56,6 +56,9 @@ namespace Twi
         }
         private int IdValue { get; set; }
         private string LoginValue { get; set; }
+        public TextBox box = new TextBox();
+        public List<TextBox> CommentBoxes { get; set; } = new List<TextBox>();
+        public int Post_Id { get; set; }
         private async void UpdateMessages()
         {
             HttpCookie login = Request.Cookies["login"];
@@ -66,7 +69,10 @@ namespace Twi
                 while (await reader.ReadAsync())
                 {
                     if (login.Value == reader["Login"].ToString())
+                    {
                         IdValue = int.Parse(reader["Id"].ToString());
+                    }
+                        
                 }
                 try
                 { }
@@ -76,13 +82,17 @@ namespace Twi
                     if (reader != null)
                         reader.Close();
                 }
-                SqlCommand GetPosts = new SqlCommand("SELECT Users.Login, UserPosts.Message FROM Users JOIN UserPosts ON Users.Id = UserPosts.User_Id", Connection);
+                SqlCommand GetPosts = new SqlCommand("SELECT Users.Login, UserPosts.Id, UserPosts.Message FROM Users JOIN UserPosts ON Users.Id = UserPosts.User_Id", Connection);
                 SqlDataReader PostReader = await GetPosts.ExecuteReaderAsync();
                 List<string> Posts = new List<string>();
                 while (await PostReader.ReadAsync())
                 {
                     if (login.Value == PostReader["Login"].ToString())
+                    {
                         Posts.Add(PostReader["Message"].ToString());
+                    }
+                    Post_Id = int.Parse(PostReader["Id"].ToString()); 
+
                 }
                 try
                 { }
@@ -92,12 +102,36 @@ namespace Twi
                     if (PostReader != null)
                         PostReader.Close();
                 }
-                //await GetPosts.ExecuteNonQueryAsync();
+                
                 foreach(string uPost in Posts)
                 {
-                    PostLabel.Text += uPost;
+                    PostList.Controls.Add(new LiteralControl($"<h3>{uPost}: </br>"));
+
+                    box = new TextBox();
+                    Button btnCmnt = new Button();
+                    btnCmnt.Click += SendCom;
+                    btnCmnt.Text = "SendComment";
+                    CommentBoxes.Add(box);
+                    PostList.Controls.Add(box);
+                    PostList.Controls.Add(new LiteralControl("</br>"));
+                    PostList.Controls.Add(btnCmnt);
+
+                    PostList.Controls.Add(new LiteralControl("</h3>"));
                 }
 
+            }
+        }
+        protected async void SendCom(object sender, EventArgs e)
+        {
+            foreach(var box in CommentBoxes)
+            {
+                if(box.Text != null)
+                {
+                    SqlCommand insertComments = new SqlCommand("INSERT INTO [CommentTable] VALUES(@Msg_Id, @Text)", Connection);
+                    insertComments.Parameters.AddWithValue("Msg_Id", Post_Id);
+                    insertComments.Parameters.AddWithValue("Text", box.Text);
+                    await insertComments.ExecuteNonQueryAsync();
+                }
             }
         }
         protected async void GoToChat(object sender, EventArgs e)

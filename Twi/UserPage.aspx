@@ -29,7 +29,7 @@
             <asp:Button runat="server" Text="Загрузить фото" OnClick="Upload_Click"/>
             <asp:Button runat="server" Text="Выйти" OnClick="Unnamed_Click" /> 
             <div>
-                <asp:Label runat="server" ID="PostLabel"></asp:Label>
+                <asp:PlaceHolder runat="server" ID="PostList"></asp:PlaceHolder>
             </div>
             
         </div>
