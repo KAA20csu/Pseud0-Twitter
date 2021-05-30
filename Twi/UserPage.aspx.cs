@@ -46,7 +46,7 @@ namespace Twi
             {
                 AuthorizedLogName.Text = login.Value;
                 face.ImageUrl = img;
-                GettPostts();
+                UpdateMessages();
             }
             else
             {
@@ -54,15 +54,77 @@ namespace Twi
             }
             
         }
-        protected async void GoToChat(object sender, EventArgs e)
+        private int IdValue { get; set; }
+        private string LoginValue { get; set; }
+        private async void UpdateMessages()
         {
             HttpCookie login = Request.Cookies["login"];
             if (PostBox.Text != null)
             {
-                SqlCommand GetPost = new SqlCommand("INSERT INTO [UserPosts] (Name, Text)VALUES(@Name, @Text)", Connection);
-                GetPost.Parameters.AddWithValue("Name", login.Value);
-                GetPost.Parameters.AddWithValue("Text", PostBox.Text);
-                await GetPost.ExecuteNonQueryAsync();
+                SqlCommand takeId = new SqlCommand("SELECT [Id], [Login] FROM [Users]", Connection);
+                SqlDataReader reader = await takeId.ExecuteReaderAsync();
+                while (await reader.ReadAsync())
+                {
+                    if (login.Value == reader["Login"].ToString())
+                        IdValue = int.Parse(reader["Id"].ToString());
+                }
+                try
+                { }
+                catch { }
+                finally
+                {
+                    if (reader != null)
+                        reader.Close();
+                }
+                SqlCommand GetPosts = new SqlCommand("SELECT Users.Login, UserPosts.Message FROM Users JOIN UserPosts ON Users.Id = UserPosts.User_Id", Connection);
+                SqlDataReader PostReader = await GetPosts.ExecuteReaderAsync();
+                List<string> Posts = new List<string>();
+                while (await PostReader.ReadAsync())
+                {
+                    if (login.Value == PostReader["Login"].ToString())
+                        Posts.Add(PostReader["Message"].ToString());
+                }
+                try
+                { }
+                catch { }
+                finally
+                {
+                    if (PostReader != null)
+                        PostReader.Close();
+                }
+                //await GetPosts.ExecuteNonQueryAsync();
+                foreach(string uPost in Posts)
+                {
+                    PostLabel.Text += uPost;
+                }
+
+            }
+        }
+        protected async void GoToChat(object sender, EventArgs e)
+        {
+            HttpCookie login = Request.Cookies["login"];
+            if(PostBox.Text != null)
+            {
+                SqlCommand takeId = new SqlCommand("SELECT [Id], [Login] FROM [Users]", Connection);
+                SqlDataReader reader = await takeId.ExecuteReaderAsync();
+                while(await reader.ReadAsync())
+                {
+                    if (login.Value == reader["Login"].ToString())
+                        IdValue = int.Parse(reader["Id"].ToString());
+                }
+                try
+                {}
+                catch{}
+                finally
+                {
+                    if (reader != null)
+                        reader.Close();
+                }
+                SqlCommand insertPost = new SqlCommand("INSERT INTO [UserPosts] VALUES(@User_Id, @Message)", Connection);
+                insertPost.Parameters.AddWithValue("User_Id", IdValue);
+                insertPost.Parameters.AddWithValue("Message", PostBox.Text);
+                await insertPost.ExecuteNonQueryAsync();
+
             }
         }
         protected void Upload_Click(object sender, EventArgs e)
@@ -118,43 +180,10 @@ namespace Twi
             login.Expires = DateTime.Now.AddDays(-1);
 
             Response.Cookies.Add(login);
-            Response.Redirect("SignIn.aspx");
+            Session.Remove(login.ToString());
+            Response.Redirect("SignIn.aspx", false);
         }
-        private async void GettPostts()
-        {
-            string ConnectionString = ConfigurationManager.ConnectionStrings["DataBaseConnection"].ConnectionString;
-            Connection = new SqlConnection(ConnectionString);
-            await Connection.OpenAsync();
-            HttpCookie login = Request.Cookies["login"];
-            SqlCommand GetText = new SqlCommand("SELECT [Name], [Text] FROM [UserPosts]", Connection);
-            SqlDataReader Reader = null;
-            Stack<IPerson> Users = new Stack<IPerson>();
-            try
-            {
-                Reader = await GetText.ExecuteReaderAsync();
-                while (await Reader.ReadAsync())
-                {
-                    Users.Push(new IPerson(Reader["Name"].ToString(), Reader["Text"].ToString()));
-                }
-            }
-            catch
-            {
-
-            }
-            finally
-            {
-                if (Reader != null)
-                    Reader.Close();
-            }
-            foreach(var c in Users)
-            {
-                if(c.Login == login.Value)
-                {
-                    l.Text += c.Text;
-                }
-            }
-            
-        }
+        
     }
     public class IPerson
     {
