@@ -8,7 +8,7 @@
     <link href="css/main.css" rel="stylesheet" />
     <link href="css/userPage.css" rel="stylesheet" />
     <link href="css/head.css" rel="stylesheet" />
-    <title></title>
+    <title> Профиль | FakeBird </title>
 </head>
 <body>
     <form runat="server" id="data">
@@ -22,24 +22,29 @@
             <asp:Image ID="face" runat="server"/><br/>
             <asp:Label runat="server" Text="Your Login" ID="AuthorizedLogName" CssClass="nameUser"></asp:Label>  
         </div>
+        <div id="settings">
+            <ul id="first">
+                <li><asp:Button runat="server" Text="Изменить" OnClick="Upload_Click" CssClass="changeBt"/></li>
+            </ul>
+            <ul id="second">
+                <li><asp:FileUpload runat="server" ID="newAva"/></li>
+            </ul>
+        </div>
+        <div id="addPost">
+            <asp:TextBox TextMode="MultiLine" Columns="30" runat="server" ID="PostBox" Wrap="true"></asp:TextBox>
+            <asp:Button runat="server" Text="Создать публикацию" OnClick="GoToChat" Id="postBt" />
+        </div>
         <div id="content">
-            <asp:TextBox runat="server" ID="PostBox"></asp:TextBox>
-            <asp:Button runat="server" Text="Создать публикацию" OnClick="GoToChat" CssClass="enterButton"/>             
-            <asp:FileUpload runat="server" ID="newAva"/>
-            <asp:Button runat="server" Text="Загрузить фото" OnClick="Upload_Click"/>
-            <asp:Button runat="server" Text="Выйти" OnClick="Unnamed_Click" /> 
-            <div>
-                <asp:PlaceHolder runat="server" ID="PostList"></asp:PlaceHolder>
-            </div>
-            
+                <asp:PlaceHolder runat="server" ID="PostList"></asp:PlaceHolder>   
         </div>
         
     </div>    
+        
     <input type="checkbox" id="nav-toggle" hidden="hidden"/>    
         <div class="nav">
             <label for="nav-toggle" class="nav-toggle"></label>
             <ul>     
-                
+                <asp:Button runat="server" Text="Выйти" OnClick="Unnamed_Click" ID="exitBt"/> 
             </ul>
         </div>  
     </form>

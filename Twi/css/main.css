@@ -29,6 +29,8 @@
     width: 250px;
     margin-top: 15px;
     background-color: #C886DF;
+    color:white;
+    font-family:monospace;
 }
 .littlEbl{
     height:80px;

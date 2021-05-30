@@ -42,15 +42,6 @@ namespace Twi
         protected global::System.Web.UI.WebControls.Label AuthorizedLogName;
 
         /// <summary>
-        /// PostBox элемент управления.
-        /// </summary>
-        /// <remarks>
-        /// Автоматически создаваемое поле.
-        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox PostBox;
-
-        /// <summary>
         /// newAva элемент управления.
         /// </summary>
         /// <remarks>
@@ -60,6 +51,24 @@ namespace Twi
         protected global::System.Web.UI.WebControls.FileUpload newAva;
 
         /// <summary>
+        /// PostBox элемент управления.
+        /// </summary>
+        /// <remarks>
+        /// Автоматически создаваемое поле.
+        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox PostBox;
+
+        /// <summary>
+        /// postBt элемент управления.
+        /// </summary>
+        /// <remarks>
+        /// Автоматически создаваемое поле.
+        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button postBt;
+
+        /// <summary>
         /// PostList элемент управления.
         /// </summary>
         /// <remarks>
@@ -67,5 +76,14 @@ namespace Twi
         /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
         /// </remarks>
         protected global::System.Web.UI.WebControls.PlaceHolder PostList;
+
+        /// <summary>
+        /// exitBt элемент управления.
+        /// </summary>
+        /// <remarks>
+        /// Автоматически создаваемое поле.
+        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button exitBt;
     }
 }

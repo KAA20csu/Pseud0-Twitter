@@ -6,6 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
+using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
 
 namespace Twi
@@ -25,25 +26,27 @@ namespace Twi
             
             SqlCommand GetImage = new SqlCommand("SELECT [Login], [Avatar] FROM [Users]", Connection);
             SqlDataReader Reader = null;
-            try
-            {
-                Reader = await GetImage.ExecuteReaderAsync();
-                while (await Reader.ReadAsync())
-                {
-                    if(login.Value == Reader["Login"].ToString())
-                    {
-                        img = Reader["Avatar"].ToString();
-                    }
-                }
-            }
-            catch { }
-            finally
-            {
-                if (Reader != null)
-                    Reader.Close();
-            }
+            
             if (login != null)
             {
+                try
+                {
+                    Reader = await GetImage.ExecuteReaderAsync();
+                    while (await Reader.ReadAsync())
+                    {
+                        if (login.Value == Reader["Login"].ToString())
+                        {
+                            img = Reader["Avatar"].ToString();
+                        }
+                    }
+                }
+                catch { }
+                finally
+                {
+                    if (Reader != null)
+                        Reader.Close();
+                }
+
                 AuthorizedLogName.Text = login.Value;
                 face.ImageUrl = img;
                 UpdateMessages();
@@ -56,8 +59,6 @@ namespace Twi
         }
         private int IdValue { get; set; }
         private string LoginValue { get; set; }
-        public TextBox box = new TextBox();
-        public List<TextBox> CommentBoxes { get; set; } = new List<TextBox>();
         public int Post_Id { get; set; }
         private async void UpdateMessages()
         {
@@ -84,15 +85,16 @@ namespace Twi
                 }
                 SqlCommand GetPosts = new SqlCommand("SELECT Users.Login, UserPosts.Id, UserPosts.Message FROM Users JOIN UserPosts ON Users.Id = UserPosts.User_Id", Connection);
                 SqlDataReader PostReader = await GetPosts.ExecuteReaderAsync();
-                List<string> Posts = new List<string>();
+                Dictionary<string, string> Posts = new Dictionary<string, string>();
                 while (await PostReader.ReadAsync())
                 {
                     if (login.Value == PostReader["Login"].ToString())
                     {
-                        Posts.Add(PostReader["Message"].ToString());
+                        if (!Posts.ContainsKey(PostReader["Id"].ToString()))
+                        {
+                            Posts.Add(PostReader["Id"].ToString(), PostReader["Message"].ToString());
+                        }
                     }
-                    Post_Id = int.Parse(PostReader["Id"].ToString()); 
-
                 }
                 try
                 { }
@@ -102,40 +104,48 @@ namespace Twi
                     if (PostReader != null)
                         PostReader.Close();
                 }
-                
-                foreach(string uPost in Posts)
-                {
-                    PostList.Controls.Add(new LiteralControl($"<h3>{uPost}: </br>"));
 
-                    box = new TextBox();
-                    Button btnCmnt = new Button();
-                    btnCmnt.Click += SendCom;
-                    btnCmnt.Text = "SendComment";
-                    CommentBoxes.Add(box);
-                    PostList.Controls.Add(box);
-                    PostList.Controls.Add(new LiteralControl("</br>"));
-                    PostList.Controls.Add(btnCmnt);
+                PostList.Controls.Clear();
+              
+                    foreach(string iPost in Posts.Keys)
+                    {
+                        var div = new HtmlGenericControl("div");
 
-                    PostList.Controls.Add(new LiteralControl("</h3>"));
-                }
+                        Label lab = new Label
+                        {
+                            Text = Posts[iPost],
+                        };
+
+                        lab.Style.Add("font-size", "20px");
+                        lab.Style.Add("font-family", "monospace");
+                        lab.ID = iPost;
+                        div.Controls.Add(lab);
+                        
+                        //Button btnCmnt = new Button();
+                        //btnCmnt.Text = "SendComment";
+                        //div.Controls.Add(btnCmnt);
+
+                        var bt = new Post(lab.ID);
+                    bt.bt.Click += Bt_Click;
+                    div.Controls.Add(bt.bt);
+                    
+
+                        PostList.Controls.Add(div);
+                    }
 
             }
         }
-        protected async void SendCom(object sender, EventArgs e)
+
+        public static HttpCookie Id { get; set; }
+        protected void Bt_Click(object sender, EventArgs e)
         {
-            foreach(var box in CommentBoxes)
-            {
-                if(box.Text != null)
-                {
-                    SqlCommand insertComments = new SqlCommand("INSERT INTO [CommentTable] VALUES(@Msg_Id, @Text)", Connection);
-                    insertComments.Parameters.AddWithValue("Msg_Id", Post_Id);
-                    insertComments.Parameters.AddWithValue("Text", box.Text);
-                    await insertComments.ExecuteNonQueryAsync();
-                }
-            }
+            Response.Cookies.Add(Id);
+            Response.Redirect("PostPage.aspx", false);
         }
+
         protected async void GoToChat(object sender, EventArgs e)
         {
+
             HttpCookie login = Request.Cookies["login"];
             if(PostBox.Text != null)
             {
@@ -157,7 +167,11 @@ namespace Twi
                 SqlCommand insertPost = new SqlCommand("INSERT INTO [UserPosts] VALUES(@User_Id, @Message)", Connection);
                 insertPost.Parameters.AddWithValue("User_Id", IdValue);
                 insertPost.Parameters.AddWithValue("Message", PostBox.Text);
+
+                PostBox.Text = null;
+
                 await insertPost.ExecuteNonQueryAsync();
+
 
             }
         }
@@ -219,7 +233,7 @@ namespace Twi
         }
         
     }
-    public class IPerson
+    public class IPerson 
     {
         public string Login { get; }
         public string Text { get; }
@@ -227,6 +241,26 @@ namespace Twi
         {
             Login = log;
             Text = text;
+        }
+    }
+    public class Post 
+    {
+        public string Id { get; }
+        public Button bt { get; }
+
+        public Post(string id)
+        {
+            Id = id;
+            bt = new Button();
+            bt.Text = "SendComment";
+            bt.Click += Bt_Click;
+        }
+
+        private void Bt_Click(object sender, EventArgs e)
+        {
+            
+            UserPage.Id = new HttpCookie("PostId", Id);
+            
         }
     }
 }

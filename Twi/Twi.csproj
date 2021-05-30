@@ -75,12 +75,20 @@
     <Content Include="css\registerWindow.css" />
     <Content Include="css\userPage.css" />
     <Content Include="HomePage.html" />
+    <Content Include="PostPage.aspx" />
     <Content Include="SignIn.aspx" />
     <Content Include="SignUp.aspx" />
     <Content Include="UserPage.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="PostPage.aspx.cs">
+      <DependentUpon>PostPage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PostPage.aspx.designer.cs">
+      <DependentUpon>PostPage.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SignIn.aspx.cs">
       <DependentUpon>SignIn.aspx</DependentUpon>

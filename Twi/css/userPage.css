@@ -11,26 +11,95 @@
 #face{
     width:150px;
     height:150px;
-    margin:0px auto;
-    margin-top:40px;
-    background-color:red;
+    background-color:darkmagenta;
     border-radius:100px;
+    padding:2px;
+    margin-top:60px;
     
 }
-.nameUser{
-    font-size:25px;
-    font-family:monospace;
-
+.nameUser {
+    font-size: 25px;
+    font-family: monospace;
 }
-#newAva{
-
-}
-#newAva ::after{
-    content:'\270E'
-}
-#content {
-    margin-top: 300px;
-    height: 100%;
-    width: 100%;
+#addPost {
+    background-color: white;
+    border-radius: 9px;
+    top: 330px;
+    height: 100px;
+    width: 510px;
     position: absolute;
+    left: 32%;
+    border:solid darkmagenta;
 }
+#settings {
+    height: 200px;
+    width: 400px;
+    background-color: #F0CCF0;
+    border-radius: 50px;
+    z-index: 1998;
+    position: relative;
+    float: right;
+    top: 100px;
+}
+#first{
+    float:left;
+    position:absolute;
+    
+}
+#first > li {
+    list-style-type:none;
+}
+#second{
+    float:left;
+    position:absolute;
+    margin-left:110px;    
+}
+#second >  li {
+    list-style-type:none;
+    float:left;
+    margin-top:4px;
+}
+
+.changeBt {
+    background-color: #C886DF;
+    height: 20px;
+    width: 80px;
+    margin-top: 4px;
+    border-radius: 30px;
+    color: white;
+    font-family: monospace;
+}
+#PostBox{
+    margin-top:5px;
+    height:49px;
+    width:480px;
+    border-radius:9px;
+}
+#postBt {
+    float: right;
+    background-color: #C886DF;
+    font-family:monospace;
+    margin:13px;
+}
+#place{
+    top:400px;
+    height:100%;
+    width:100%;
+}
+#content{
+    height:100%;
+    width:100%;
+    top:450px;
+    position:absolute;
+    text-align:center;
+}
+#content > div{
+    width:520px;
+    background-color:white;
+    text-align:center;
+    margin-bottom:10px;
+    border: solid darkmagenta;
+    border-radius: 10px;
+    padding: 20px 0;
+}
+
