@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data.SqlClient;
+using System.Drawing;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -14,6 +15,7 @@ namespace Twi
     {
         private SqlConnection Connection { get; set; } = null;
 
+        public HttpCookie Name;
         protected async void Page_Load(object sender, EventArgs e)
         {
             string ConnectionString = ConfigurationManager.ConnectionStrings["DataBaseConnection"].ConnectionString;
@@ -39,10 +41,11 @@ namespace Twi
             {
                 var div = new HtmlGenericControl("div");
 
-                Label name = new Label
+                Button name = new Button
                 {
                     Text = user.Name + " "
                 };
+                name.Click += Clickk;
                 Label post = new Label
                 {
                     Text = user.Text + " "
@@ -55,6 +58,13 @@ namespace Twi
                 div.Controls.Add(post);
                 NewsBox.Controls.Add(div);
             }
+        }
+        private void Clickk(object sender, EventArgs e)
+        {
+            var name = sender as Button;
+            HttpCookie cookieLog = new HttpCookie("redirProf", name.Text);
+            Response.Cookies.Add(cookieLog);
+            Response.Redirect("UserProfileToOther.aspx", false);
         }
     }
     public class UserWithPost

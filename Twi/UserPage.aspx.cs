@@ -58,7 +58,7 @@ namespace Twi
             
         }
         private int IdValue { get; set; }
-        private string LoginValue { get; set; }
+       // private string LoginValue { get; set; }
         public int Post_Id { get; set; }
         private async void UpdateMessages()
         {
@@ -120,19 +120,11 @@ namespace Twi
                         lab.Style.Add("font-family", "monospace");
                         lab.ID = iPost;
                         div.Controls.Add(lab);
-                        
-                        //Button btnCmnt = new Button();
-                        //btnCmnt.Text = "SendComment";
-                        //div.Controls.Add(btnCmnt);
-
                         var bt = new Post(lab.ID);
-                    bt.bt.Click += Bt_Click;
-                    div.Controls.Add(bt.bt);
-                    
-
+                        bt.bt.Click += Bt_Click;
+                        div.Controls.Add(bt.bt);
                         PostList.Controls.Add(div);
                     }
-
             }
         }
 
@@ -142,7 +134,6 @@ namespace Twi
             Response.Cookies.Add(Id);
             Response.Redirect("PostPage.aspx", false);
         }
-
         protected async void GoToChat(object sender, EventArgs e)
         {
 

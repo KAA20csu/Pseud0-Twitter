@@ -29,7 +29,7 @@ namespace Twi
             SqlDataReader CommentReader = await GetComments.ExecuteReaderAsync();
             while(await CommentReader.ReadAsync())
             {
-                if(Post_Id.Value == CommentReader["Msg_Id"].ToString())
+                if(Post_Id.Value  == CommentReader["Msg_Id"].ToString())
                 {
                     CommentList.Add(CommentReader["Text"].ToString());
                 }

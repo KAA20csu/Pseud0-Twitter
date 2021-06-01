@@ -80,6 +80,7 @@
     <Content Include="SignIn.aspx" />
     <Content Include="SignUp.aspx" />
     <Content Include="UserPage.aspx" />
+    <Content Include="UserProfileToOther.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -118,6 +119,13 @@
     </Compile>
     <Compile Include="UserPage.aspx.designer.cs">
       <DependentUpon>UserPage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="UserProfileToOther.aspx.cs">
+      <DependentUpon>UserProfileToOther.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserProfileToOther.aspx.designer.cs">
+      <DependentUpon>UserProfileToOther.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
