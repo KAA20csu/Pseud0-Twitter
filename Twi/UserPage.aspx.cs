@@ -174,6 +174,7 @@ namespace Twi
 
 
             }
+            Response.Redirect("UserPage.aspx", false);
         }
         protected void Upload_Click(object sender, EventArgs e)
         {
