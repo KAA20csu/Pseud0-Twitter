@@ -7,13 +7,15 @@
 .linkes {
     background-color: #F6D9F7;
     border-radius: 30px;
-    padding: 14px;
+    padding: 20px 30px 20px 30px;
     color: darkmagenta;
     margin: 50px;
     text-decoration: none;
     font-family: monospace;
     font-size: 15px;
-    border:solid darkmagenta;
+    -webkit-box-shadow: 0px 0px 8px 6px rgba(132, 17, 176, 0.2) inset;
+    -moz-box-shadow: 0px 0px 8px 6px rgba(132, 17, 176, 0.2) inset;
+    box-shadow: 0px 0px 8px 6px rgba(132, 17, 176, 0.2) inset;
 }
 .inputBox {
     border-radius: 50px;
@@ -34,6 +36,30 @@
 }
 .littlEbl{
     height:80px;
+}
+.content{
+    height:100%;
+    width:100%;
+    top:450px;
+    position:absolute;
+    /*text-align:center;*/
+    left:0px;
+    
+}
+.content > div{
+    width:520px;
+    background-color:white;
+    text-align:center;
+    margin-bottom:10px;
+    border-radius: 10px;
+    padding: 20px 0;
+    position:relative;
+    margin-left:31.6%;    
+    word-wrap:break-word;
+
+    -webkit-box-shadow: 0px 0px 14px -4px rgba(134, 46, 135, 0.51) inset;
+    -moz-box-shadow: 0px 0px 14px -4px rgba(134, 46, 135, 0.51) inset;
+    box-shadow: 0px 0px 14px -4px rgba(134, 46, 135, 0.51) inset;
 }
 
 

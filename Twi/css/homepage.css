@@ -34,5 +34,18 @@
     display: flex;
 }
 #linkEnter{
-    padding:14px 35px 14px 35px;
+    padding:20px 55px 20px 55px;
 }
+#backing {
+    margin: 10px;
+    padding: 20px;
+    background-color: #F0DCF4;
+    border-radius: 20px;
+    -webkit-box-shadow: 0px 0px 8px 6px rgba(132, 17, 176, 0.2) ;
+    -moz-box-shadow: 0px 0px 8px 6px rgba(132, 17, 176, 0.2) ;
+    box-shadow: 0px 0px 8px 6px rgba(132, 17, 176, 0.2) ;
+}
+#backing>h1{
+    font-family:monospace;
+}
+

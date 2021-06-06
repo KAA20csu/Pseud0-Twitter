@@ -7,6 +7,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
+using Twi.Models;
 
 namespace Twi
 {
@@ -21,11 +22,12 @@ namespace Twi
             await Connection.OpenAsync();
 
             HttpCookie redirCookie = Request.Cookies["redirProf"];
-            SqlCommand GetUserPosts = new SqlCommand("SELECT UserPosts.User_Id, UserPosts.Id, UserPosts.Message, Users.Id, Users.Login " +
+           
+            SqlCommand GetUserPosts = new SqlCommand("SELECT UserPosts.User_Id, UserPosts.Id, UserPosts.Message, Users.Id, Users.Avatar, Users.Login " +
                 "FROM UserPosts JOIN Users ON UserPosts.User_id=Users.Id", Connection);
             Dictionary<string,string> PostList = new Dictionary<string, string>();
             SqlDataReader ReadUserPosts = await GetUserPosts.ExecuteReaderAsync();
-            while(await ReadUserPosts.ReadAsync())
+            while (await ReadUserPosts.ReadAsync())
             {
                 if(redirCookie.Value == ReadUserPosts["Login"].ToString())
                 {
@@ -41,33 +43,77 @@ namespace Twi
                     ReadUserPosts.Close();
                 }
             }
-            foreach(var c in PostList)
-            {
-                var div = new HtmlGenericControl("div");
 
-                Label post = new Label
-                {
-                    Text = c.Value
-                };
-                Button btn = new Button
-                {
-                    Text = "Обсудить",
-                    ID=c.Key
-                };
-                btn.Click += Click;
-                post.Style.Add("font-size", "20px");
-                post.Style.Add("font-family", "monospace");
-                div.Controls.Add(post);
-                div.Controls.Add(btn);
-                Posts.Controls.Add(div);
+
+            UserProfile(redirCookie);
+
+
+
+            foreach (var c in PostList)
+            {
+
+                var function = new HtmlGenericControl("div");
+                var osnova = new HtmlGenericControl("div");
+
+                var name = Post.GetName(redirCookie.Value);
+                name.Click += NameClick;
+
+                var commBt = Post.GetBtComm(c.Key);
+                commBt.Click += CommClick;
+
+                function.Controls.Add(commBt);
+                osnova.Controls.Add(Post.GetInfoUser(face.ImageUrl, name));
+                osnova.Controls.Add(Post.GetContent(c.Value));
+                osnova.Controls.Add(function);
+
+                Posts.Controls.Add(osnova);
             }
         }
-        private void Click(object sender, EventArgs e)
+        protected async void UserProfile(HttpCookie redirCookie)
+        {
+            SqlCommand GetUser = new SqlCommand("Select Users.Login, Users.Avatar from Users", Connection);
+
+            SqlDataReader ReadUsers = await GetUser.ExecuteReaderAsync();
+            while (await ReadUsers.ReadAsync())
+            {
+                if (redirCookie.Value == ReadUsers["Login"].ToString())
+                {
+                    face.ImageUrl = ReadUsers["Avatar"].ToString();
+                    AuthorizedLogName.Text = ReadUsers["Login"].ToString();
+                }
+            }
+            try { }
+            catch { }
+            finally
+            {
+                if (ReadUsers != null)
+                {
+                    ReadUsers.Close();
+                }
+            }
+        }
+        private void CommClick(object sender, EventArgs e)
         {
             var c = sender as Button;
             HttpCookie crntPost = new HttpCookie("PostID", c.ID);
             Response.Cookies.Add(crntPost);
             Response.Redirect("PostPage.aspx",false);
+        }
+        private void NameClick(object sender, EventArgs e)
+        {
+            var name = sender as Button;
+            HttpCookie cookieLog = new HttpCookie("redirProf", name.Text);
+            Response.Cookies.Add(cookieLog);
+            Response.Redirect("UserProfileToOther.aspx", false);
+        }
+        protected void Unnamed_Click(object sender, EventArgs e)
+        {
+            HttpCookie login = Request.Cookies["login"];
+            login.Expires = DateTime.Now.AddDays(-1);
+
+            Response.Cookies.Add(login);
+            Session.Remove(login.ToString());
+            Response.Redirect("HomePage.html", false);
         }
     }
 }

@@ -72,6 +72,8 @@
     <Content Include="css\homepage.css" />
     <Content Include="css\loginWindow.css" />
     <Content Include="css\main.css" />
+    <Content Include="css\newspage.css" />
+    <Content Include="css\postpage.css" />
     <Content Include="css\registerWindow.css" />
     <Content Include="css\userPage.css" />
     <Content Include="HomePage.html" />
@@ -84,6 +86,7 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Models\Post.cs" />
     <Compile Include="NewsPage.aspx.cs">
       <DependentUpon>NewsPage.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

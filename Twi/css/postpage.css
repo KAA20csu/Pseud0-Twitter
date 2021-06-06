@@ -1,0 +1,93 @@
+﻿#post {
+    width: 520px;
+    background-color: white;
+    text-align: center;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    padding: 20px 0;
+    position: relative;
+    margin-left: 31.6%;
+    margin-top: 90px;
+    word-wrap: break-word;
+    -webkit-box-shadow: 0px 0px 14px -4px rgba(134, 46, 135, 0.51) inset;
+    -moz-box-shadow: 0px 0px 14px -4px rgba(134, 46, 135, 0.51) inset;
+    box-shadow: 0px 0px 14px -4px rgba(134, 46, 135, 0.51) inset;
+}
+#infoUser {
+    background-color: #F0DCF4;
+    margin-top:-18.6px;
+    border-radius:10px 10px 0 0;
+}
+#ava{
+    height:40px;
+    width:40px;
+    border-radius:100px;
+    margin:4px 0 0 -420px;
+}
+#nameUser{
+    position:absolute;
+    background:inherit;
+    color:darkmagenta;
+    outline:none;
+    border:0;
+    cursor:pointer;
+    font-size:20px;
+    font-family:monospace;
+    left:84px;
+    top:12px;
+}
+#content{
+    margin:20px;
+}
+#text{
+    font-size:20px;
+    font-family:monospace;
+}
+#addCmDiv {
+    background-color: white;
+    border-radius: 9px;
+    height: 100px;
+    width: 510px;
+    margin-left: 32%;
+    -webkit-box-shadow: 0px 0px 14px -4px rgba(134, 46, 135, 0.51) inset;
+    -moz-box-shadow: 0px 0px 14px -4px rgba(134, 46, 135, 0.51) inset;
+    box-shadow: 0px 0px 14px -4px rgba(134, 46, 135, 0.51) inset;
+    margin-top:10px;
+}
+#comm {
+    margin-top: 5px;
+    height: 49px;
+    width: 480px;
+    border-radius: 9px;
+}
+#btComm {
+    float: right;
+    background-color: inherit;
+    color: darkmagenta;
+    cursor: pointer;
+    font-family: monospace;
+    margin: 13px;
+    outline: none;
+    border: 0;
+}
+#comments {
+    background-color: white;
+    width: 600px;
+    height: 55vh;
+    max-height: 55vh;
+    margin: 15px 0 0 28.4%;
+    border-radius: 10px;
+    -webkit-box-shadow: 0px 0px 14px -4px rgba(134, 46, 135, 0.51) inset;
+    -moz-box-shadow: 0px 0px 14px -4px rgba(134, 46, 135, 0.51) inset;
+    box-shadow: 0px 0px 14px -4px rgba(134, 46, 135, 0.51) inset;
+    word-break: break-word;
+    overflow-y:auto;
+}
+#comments>div{
+    -webkit-box-shadow: 0px 0px 14px -4px rgba(134, 46, 135, 0.51) inset;
+    -moz-box-shadow: 0px 0px 14px -4px rgba(134, 46, 135, 0.51) inset;
+    box-shadow: 0px 0px 14px -4px rgba(134, 46, 135, 0.51) inset;
+
+    padding:20px;
+    margin:2px;
+}

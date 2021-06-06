@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
+using Twi.Models;
 
 namespace Twi
 {
@@ -22,13 +23,13 @@ namespace Twi
             Connection = new SqlConnection(ConnectionString);
             await Connection.OpenAsync();
 
-            SqlCommand GetAllPosts = new SqlCommand("SELECT UserPosts.User_Id, UserPosts.Message, Users.Id, Users.Login " +
+            SqlCommand GetAllPosts = new SqlCommand("SELECT UserPosts.Id, Users.Avatar, UserPosts.User_Id, UserPosts.Message, Users.Login " +
                 "FROM UserPosts JOIN Users ON UserPosts.User_id=Users.Id", Connection);
-            List<UserWithPost> AllPostsList = new List<UserWithPost>();
+            Stack<UserWithPost> AllPostsList = new Stack<UserWithPost>();
             SqlDataReader ReadAllPosts = await GetAllPosts.ExecuteReaderAsync();
             while(await ReadAllPosts.ReadAsync())
             {
-                AllPostsList.Add(new UserWithPost(ReadAllPosts["Login"].ToString(), ReadAllPosts["Message"].ToString()));
+                AllPostsList.Push(new UserWithPost(ReadAllPosts["Login"].ToString(), ReadAllPosts["Message"].ToString(), ReadAllPosts["Avatar"].ToString(), ReadAllPosts["Id"].ToString()));
             }
             try { }
             catch { }
@@ -39,26 +40,31 @@ namespace Twi
             }
             foreach(var user in AllPostsList)
             {
-                var div = new HtmlGenericControl("div");
-
-                Button name = new Button
-                {
-                    Text = user.Name + " "
-                };
+                var function = new HtmlGenericControl("div");
+                var osnova = new HtmlGenericControl("div");
+                
+                var name = Post.GetName(user.Name);
                 name.Click += Clickk;
-                Label post = new Label
-                {
-                    Text = user.Text + " "
-                };
-                name.Style.Add("font-size", "20px");
-                name.Style.Add("font-family", "monospace");
-                post.Style.Add("font-size", "20px");
-                post.Style.Add("font-family", "monospace");
-                div.Controls.Add(name);
-                div.Controls.Add(post);
-                NewsBox.Controls.Add(div);
+
+                var commBt = Post.GetBtComm(user.PostId);
+                commBt.Click += CommClick;
+
+                function.Controls.Add(commBt);
+                osnova.Controls.Add(Post.GetInfoUser(user.AvaUrl, name));
+                osnova.Controls.Add(Post.GetContent(user.Text));
+                osnova.Controls.Add(function);
+                NewsBox.Controls.Add(osnova);
             }
         }
+
+        private void CommClick(object sender, EventArgs e)
+        {
+            var c = sender as Button;
+            HttpCookie crntPost = new HttpCookie("PostID", c.ID);
+            Response.Cookies.Add(crntPost);
+            Response.Redirect("PostPage.aspx", false);
+        }
+
         private void Clickk(object sender, EventArgs e)
         {
             var name = sender as Button;
@@ -66,15 +72,28 @@ namespace Twi
             Response.Cookies.Add(cookieLog);
             Response.Redirect("UserProfileToOther.aspx", false);
         }
+        protected void Unnamed_Click(object sender, EventArgs e)
+        {
+            HttpCookie login = Request.Cookies["login"];
+            login.Expires = DateTime.Now.AddDays(-1);
+
+            Response.Cookies.Add(login);
+            Session.Remove(login.ToString());
+            Response.Redirect("HomePage.html", false);
+        }
     }
     public class UserWithPost
     {
-        public string Name { get; set; }
-        public string Text { get; set; }
-        public UserWithPost(string name, string text)
+        public string Name { get; }
+        public string Text { get; }
+        public string AvaUrl { get; }
+        public string PostId { get; }
+        public UserWithPost(string name, string text, string avaUrl, string postId)
         {
             Name = name;
             Text = text;
+            AvaUrl = avaUrl;
+            PostId = postId;
         }
     }
 }

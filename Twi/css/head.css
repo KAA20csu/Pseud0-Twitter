@@ -66,6 +66,7 @@
     margin: 0;
     padding: 0;
     list-style: none;
+    margin-top:65px;
 }
 
     .nav > ul > li {
@@ -112,4 +113,13 @@
 }
 [id='nav-toggle']:checked ~ .nav > ul > #exitBt{
     left:25px;
+}
+.menuBt {
+    background: inherit;
+    width: 300px;
+    height: 50px;
+    margin: 5px 0 5px 0;
+}
+[id='nav-toggle']:checked ~ .nav > ul > .menuBt {
+    margin-left: 25px;
 }

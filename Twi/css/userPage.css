@@ -29,7 +29,9 @@
     width: 510px;
     position: absolute;
     left: 32%;
-    border:solid darkmagenta;
+    -webkit-box-shadow: 0px 0px 14px -4px rgba(134, 46, 135, 0.51) inset;
+    -moz-box-shadow: 0px 0px 14px -4px rgba(134, 46, 135, 0.51) inset;
+    box-shadow: 0px 0px 14px -4px rgba(134, 46, 135, 0.51) inset;
 }
 #settings {
     height: 200px;
@@ -77,29 +79,14 @@
 }
 #postBt {
     float: right;
-    background-color: #C886DF;
+    background-color: inherit;
+    color:darkmagenta;
+    cursor:pointer;
     font-family:monospace;
     margin:13px;
+    outline:none;
+    border:0;
 }
-#place{
-    top:400px;
-    height:100%;
-    width:100%;
-}
-#content{
-    height:100%;
-    width:100%;
-    top:450px;
-    position:absolute;
-    text-align:center;
-}
-#content > div{
-    width:520px;
-    background-color:white;
-    text-align:center;
-    margin-bottom:10px;
-    border: solid darkmagenta;
-    border-radius: 10px;
-    padding: 20px 0;
-}
+
+
 

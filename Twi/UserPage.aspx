@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" Async="true" AutoEventWireup="true" CodeBehind="UserPage.aspx.cs" Inherits="Twi.UserPage"  %>
+﻿    <%@ Page Language="C#" Async="true" AutoEventWireup="true" CodeBehind="UserPage.aspx.cs" Inherits="Twi.UserPage"  %>
 
 <!DOCTYPE html>
 
@@ -34,7 +34,7 @@
             <asp:TextBox TextMode="MultiLine" Columns="30" runat="server" ID="PostBox" Wrap="true"></asp:TextBox>
             <asp:Button runat="server" Text="Создать публикацию" OnClick="GoToChat" Id="postBt" />
         </div>
-        <div id="content">
+        <div class="content">
                 <asp:PlaceHolder runat="server" ID="PostList"></asp:PlaceHolder>   
         </div>
         
@@ -45,6 +45,8 @@
             <label for="nav-toggle" class="nav-toggle"></label>
             <ul>     
                 <asp:Button runat="server" Text="Выйти" OnClick="Unnamed_Click" ID="exitBt"/> 
+                <asp:Button Text="Моя Страница" runat="server" PostBackUrl="~/UserPage.aspx" CssClass="menuBt"/>
+                <asp:Button Text="Новостная Лента" runat="server" PostBackUrl="~/NewsPage.aspx" CssClass="menuBt"/>
             </ul>
         </div>  
     </form>

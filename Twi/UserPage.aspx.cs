@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
+using Twi.Models;
 
 namespace Twi
 {
@@ -53,7 +54,7 @@ namespace Twi
             }
             else
             {
-                Response.Redirect("SignIn.aspx");
+                Response.Redirect("HomePage.html");
             }
             
         }
@@ -107,38 +108,43 @@ namespace Twi
 
                 PostList.Controls.Clear();
               
-                    foreach(string iPost in Posts.Keys)
-                    {
-                        var div = new HtmlGenericControl("div");
+                foreach(string iPost in Posts.Keys)
+                {
+                    var function = new HtmlGenericControl("div");
+                    var osnova = new HtmlGenericControl("div");
 
-                        Label lab = new Label
-                        {
-                            Text = Posts[iPost],
-                        };
+                    var name = Post.GetName(login.Value);
+                    name.Click += Clickk;
 
-                        lab.Style.Add("font-size", "20px");
-                        lab.Style.Add("font-family", "monospace");
-                        lab.ID = iPost;
-                        div.Controls.Add(lab);
-                        var bt = new Post(lab.ID);
-                        bt.bt.Click += Bt_Click;
-                        div.Controls.Add(bt.bt);
-                        PostList.Controls.Add(div);
-                    }
+                    var commBt = Post.GetBtComm(iPost);
+                    commBt.Click += CommClick;
+
+                    function.Controls.Add(commBt);
+                    osnova.Controls.Add(Post.GetInfoUser(face.ImageUrl, name));
+                    osnova.Controls.Add(Post.GetContent(Posts[iPost]));
+                    osnova.Controls.Add(function);
+
+                    PostList.Controls.Add(osnova);
+                }
             }
         }
 
-        public static HttpCookie Id { get; set; }
-        protected void Bt_Click(object sender, EventArgs e)
+        private void Clickk(object sender, EventArgs e)
         {
-            Response.Cookies.Add(Id);
+            Response.Redirect("UserPage.aspx", false);
+        }
+        private void CommClick(object sender, EventArgs e)
+        {
+            var c = sender as Button;
+            HttpCookie crntPost = new HttpCookie("PostID", c.ID);
+            Response.Cookies.Add(crntPost);
             Response.Redirect("PostPage.aspx", false);
         }
         protected async void GoToChat(object sender, EventArgs e)
         {
 
             HttpCookie login = Request.Cookies["login"];
-            if(PostBox.Text != null)
+            if(!String.IsNullOrWhiteSpace(PostBox.Text))
             {
                 SqlCommand takeId = new SqlCommand("SELECT [Id], [Login] FROM [Users]", Connection);
                 SqlDataReader reader = await takeId.ExecuteReaderAsync();
@@ -221,7 +227,7 @@ namespace Twi
 
             Response.Cookies.Add(login);
             Session.Remove(login.ToString());
-            Response.Redirect("SignIn.aspx", false);
+            Response.Redirect("HomePage.html", false);
         }
         
     }
@@ -235,24 +241,5 @@ namespace Twi
             Text = text;
         }
     }
-    public class Post 
-    {
-        public string Id { get; }
-        public Button bt { get; }
-
-        public Post(string id)
-        {
-            Id = id;
-            bt = new Button();
-            bt.Text = "SendComment";
-            bt.Click += Bt_Click;
-        }
-
-        private void Bt_Click(object sender, EventArgs e)
-        {
-            
-            UserPage.Id = new HttpCookie("PostId", Id);
-            
-        }
-    }
+    
 }
