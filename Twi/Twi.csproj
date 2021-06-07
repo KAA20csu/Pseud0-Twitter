@@ -68,6 +68,8 @@
     <Content Include="App_Data\UserBase_log.ldf">
       <DependentUpon>UserBase.mdf</DependentUpon>
     </Content>
+    <Content Include="ChangePassword.aspx" />
+    <Content Include="css\changePassword.css" />
     <Content Include="css\head.css" />
     <Content Include="css\homepage.css" />
     <Content Include="css\loginWindow.css" />
@@ -86,6 +88,13 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ChangePassword.aspx.cs">
+      <DependentUpon>ChangePassword.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ChangePassword.aspx.designer.cs">
+      <DependentUpon>ChangePassword.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Models\Post.cs" />
     <Compile Include="NewsPage.aspx.cs">
       <DependentUpon>NewsPage.aspx</DependentUpon>

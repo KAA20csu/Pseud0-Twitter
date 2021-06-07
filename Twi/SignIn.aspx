@@ -37,7 +37,12 @@
                 </asp:TableRow>
                 <asp:TableRow>
                     <asp:TableCell>
-                        <asp:Button Text="Войти" runat="server" OnClick="Login_Click" CssClass="enterButton"/>
+                        <asp:Button Text="Войти" runat="server" OnClick="Login_Click" CssClass="enterButton"/><br/>
+                    </asp:TableCell>
+                </asp:TableRow>
+                <asp:TableRow>
+                    <asp:TableCell>
+                        <asp:HyperLink runat="server" NavigateUrl="~/ChangePassword.aspx" CssClass="linkwa" Text="Забыли пароль?"/>
                     </asp:TableCell>
                 </asp:TableRow>
             </asp:Table>

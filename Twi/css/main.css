@@ -61,6 +61,13 @@
     -moz-box-shadow: 0px 0px 14px -4px rgba(134, 46, 135, 0.51) inset;
     box-shadow: 0px 0px 14px -4px rgba(134, 46, 135, 0.51) inset;
 }
+.linkwa {
+    text-decoration: none;
+    color:darkmagenta;
+    top:19px;
+    position:relative;
+
+}
 
 
 
